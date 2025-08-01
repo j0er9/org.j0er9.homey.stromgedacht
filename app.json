@@ -1,0 +1,310 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "org.j0er9.homey.stromgedacht",
+  "version": "0.0.1",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Stromgedacht - Power Grid Status"
+  },
+  "description": {
+    "en": "Integrates StromGedacht Api to access power grid status of Baden-Würtemberg (Germany). Stay informed about your region’s electricity grid status and make smarter energy decisions!"
+  },
+  "category": [
+    "tools"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "j0er9"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "current-grid-status-changed",
+        "title": {
+          "en": "Current Grid Status changed"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=grid-status-monitor"
+          },
+          {
+            "type": "dropdown",
+            "name": "currentGridStatusChangedTo",
+            "values": [
+              {
+                "id": "green",
+                "label": {
+                  "en": "Green",
+                  "de": "Grün",
+                  "nl": "Groen",
+                  "es": "Verde"
+                }
+              },
+              {
+                "id": "superGreen",
+                "label": {
+                  "en": "Super Green",
+                  "de": "Super Grün",
+                  "nl": "Super Groen",
+                  "es": "Super Verde"
+                }
+              },
+              {
+                "id": "yellow",
+                "label": {
+                  "en": "Yellow",
+                  "de": "Gelb",
+                  "nl": "Geel",
+                  "es": "Amarillo"
+                }
+              },
+              {
+                "id": "red",
+                "label": {
+                  "en": "Red",
+                  "de": "Rot",
+                  "nl": "Rood",
+                  "es": "Rojo"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Grid Status Monitor"
+      },
+      "class": "other",
+      "capabilities": [
+        "status_power_grid_now",
+        "status_power_grid_6h_forecast",
+        "status_power_grid_24h_forecast"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [],
+      "images": {
+        "small": "/drivers/grid-status-monitor/assets/images/small.png",
+        "large": "/drivers/grid-status-monitor/assets/images/large.png",
+        "xlarge": "/drivers/grid-status-monitor/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "validate_plz",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "validate_plz",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "grid-status-monitor"
+    }
+  ],
+  "capabilities": {
+    "status_power_grid_24h_forecast": {
+      "id": "status_power_grid_24h_forecast",
+      "type": "enum",
+      "title": {
+        "en": "24h Forecast",
+        "de": "24h Vorhersage",
+        "nl": "24-uurs Voorspelling",
+        "es": "Pronóstico 24h"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "green",
+          "title": {
+            "en": "Green",
+            "de": "Grün",
+            "nl": "Groen",
+            "es": "Verde"
+          }
+        },
+        {
+          "id": "superGreen",
+          "title": {
+            "en": "Super Green",
+            "de": "Super Grün",
+            "nl": "Super Groen",
+            "es": "Super Verde"
+          }
+        },
+        {
+          "id": "yellow",
+          "title": {
+            "en": "Yellow",
+            "de": "Gelb",
+            "nl": "Geel",
+            "es": "Amarillo"
+          }
+        },
+        {
+          "id": "red",
+          "title": {
+            "en": "Red",
+            "de": "Rot",
+            "nl": "Rood",
+            "es": "Rojo"
+          }
+        },
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "de": "Unbekannt",
+            "nl": "Onbekend",
+            "es": "Desconocido"
+          }
+        }
+      ]
+    },
+    "status_power_grid_6h_forecast": {
+      "id": "status_power_grid_6h_forecast",
+      "type": "enum",
+      "title": {
+        "en": "6h Forecast",
+        "de": "6h Vorhersage",
+        "nl": "6-uurs Voorspelling",
+        "es": "Pronóstico 6h"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "green",
+          "title": {
+            "en": "Green",
+            "de": "Grün",
+            "nl": "Groen",
+            "es": "Verde"
+          }
+        },
+        {
+          "id": "superGreen",
+          "title": {
+            "en": "Super Green",
+            "de": "Super Grün",
+            "nl": "Super Groen",
+            "es": "Super Verde"
+          }
+        },
+        {
+          "id": "yellow",
+          "title": {
+            "en": "Yellow",
+            "de": "Gelb",
+            "nl": "Geel",
+            "es": "Amarillo"
+          }
+        },
+        {
+          "id": "red",
+          "title": {
+            "en": "Red",
+            "de": "Rot",
+            "nl": "Rood",
+            "es": "Rojo"
+          }
+        },
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "de": "Unbekannt",
+            "nl": "Onbekend",
+            "es": "Desconocido"
+          }
+        }
+      ]
+    },
+    "status_power_grid_now": {
+      "id": "status_power_grid_now",
+      "type": "enum",
+      "title": {
+        "en": "Current Grid Status",
+        "de": "Aktueller Netzstatus",
+        "nl": "Huidige Netstatus",
+        "es": "Estado Actual de la Red"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "green",
+          "title": {
+            "en": "Green",
+            "de": "Grün",
+            "nl": "Groen",
+            "es": "Verde"
+          }
+        },
+        {
+          "id": "superGreen",
+          "title": {
+            "en": "Super Green",
+            "de": "Super Grün",
+            "nl": "Super Groen",
+            "es": "Super Verde"
+          }
+        },
+        {
+          "id": "yellow",
+          "title": {
+            "en": "Yellow",
+            "de": "Gelb",
+            "nl": "Geel",
+            "es": "Amarillo"
+          }
+        },
+        {
+          "id": "red",
+          "title": {
+            "en": "Red",
+            "de": "Rot",
+            "nl": "Rood",
+            "es": "Rojo"
+          }
+        },
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "de": "Unbekannt",
+            "nl": "Onbekend",
+            "es": "Desconocido"
+          }
+        }
+      ]
+    }
+  }
+}

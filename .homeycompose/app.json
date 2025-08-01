@@ -1,0 +1,27 @@
+{
+  "id": "org.j0er9.homey.stromgedacht",
+  "version": "0.0.1",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Stromgedacht - Power Grid Status"
+  },
+  "description": {
+    "en": "Integrates StromGedacht Api to access power grid status of Baden-Würtemberg (Germany). Stay informed about your region’s electricity grid status and make smarter energy decisions!"
+  },
+  "category": [
+    "tools"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "j0er9"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": {
+    "en": "Grid Status Monitor"
+  },
+  "class": "other",
+  "capabilities": [ "status_power_grid_now",
+        "status_power_grid_6h_forecast",
+        "status_power_grid_24h_forecast"],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "validate_plz",
+      "next": "list_devices"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "validate_plz",
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

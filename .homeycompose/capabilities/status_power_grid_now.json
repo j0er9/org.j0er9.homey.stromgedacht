@@ -1,0 +1,60 @@
+{
+  "id": "status_power_grid_now",
+  "type": "enum",
+  "title": {
+    "en": "Current Grid Status",
+    "de": "Aktueller Netzstatus",
+    "nl": "Huidige Netstatus",
+    "es": "Estado Actual de la Red"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "green",
+      "title": {
+        "en": "Green",
+        "de": "Grün",
+        "nl": "Groen",
+        "es": "Verde"
+      }
+    },
+    {
+      "id": "superGreen",
+      "title": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+            }
+    },
+    {
+      "id": "yellow",
+      "title": {
+        "en": "Yellow",
+        "de": "Gelb",
+        "nl": "Geel",
+        "es": "Amarillo"
+      }
+    },
+    {
+      "id": "red",
+      "title": {
+        "en": "Red",
+        "de": "Rot",
+        "nl": "Rood",
+        "es": "Rojo"
+      }
+    },
+    {
+      "id": "unknown",
+      "title": {
+        "en": "Unknown",
+        "de": "Unbekannt",
+        "nl": "Onbekend",
+        "es": "Desconocido"
+      }
+    }
+  ]
+}

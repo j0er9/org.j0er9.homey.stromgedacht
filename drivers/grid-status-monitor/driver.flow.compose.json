@@ -1,0 +1,54 @@
+{
+  "triggers": [
+    {
+      "id": "current-grid-status-changed",
+      "title": {
+        "en": "Current Grid Status changed"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "currentGridStatusChangedTo",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
