@@ -3,12 +3,139 @@
     {
       "id": "current-grid-status-changed",
       "title": {
-        "en": "Current Grid Status changed"
+        "en": "Current Grid Status changed",
+        "de": "Aktueller Netzstatus geändert",
+        "nl": "Huidige netstatus veranderd",
+        "es": "Estado actual de la red cambió"
+      },
+      "titleFormatted": {
+        "en": "Current Grid Status changed to [[onlyExecuteForStatus]]",
+        "de": "Aktueller Netzstatus ändert sich zu [[onlyExecuteForStatus]]",
+        "nl": "Huidige netstatus veranderd naar [[onlyExecuteForStatus]]",
+        "es": "Estado actual de la red cambió a [[onlyExecuteForStatus]]"
       },
       "args": [
         {
           "type": "dropdown",
-          "name": "currentGridStatusChangedTo",
+          "name": "onlyExecuteForStatus",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6h-forecast-grid-status-changed",
+      "title": {
+        "en": "6h Forecast Grid Status changed",
+        "de": "6h-Netzstatus-Prognose geändert",
+        "nl": "6-uurs netstatusvoorspelling veranderd",
+        "es": "Pronóstico de 6h del estado de la red cambió"
+      },
+      "titleFormatted": {
+        "en": "6h Forecast Grid Status changed to [[onlyExecuteForStatus]]",
+        "de": "6h-Netzstatus-Prognose ändert sich zu [[onlyExecuteForStatus]]",
+        "nl": "6-uurs netstatusvoorspelling veranderd naar [[onlyExecuteForStatus]]",
+        "es": "Pronóstico de 6h del estado de la red cambió a [[onlyExecuteForStatus]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "onlyExecuteForStatus",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24h-forecast-grid-status-changed",
+      "title": {
+        "en": "24h Forecast Grid Status changed",
+        "de": "24h-Netzstatus-Prognose geändert",
+        "nl": "24-uurs netstatusvoorspelling veranderd",
+        "es": "Pronóstico de 24h del estado de la red cambió"
+      },
+      "titleFormatted": {
+        "en": "24h Forecast Grid Status changed to [[onlyExecuteForStatus]]",
+        "de": "24h-Netzstatus-Prognose ändert sich zu [[onlyExecuteForStatus]]",
+        "nl": "24-uurs netstatusvoorspelling veranderd naar [[onlyExecuteForStatus]]",
+        "es": "Pronóstico de 24h del estado de la red cambió a [[onlyExecuteForStatus]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "onlyExecuteForStatus",
           "values": [
             {
               "id": "green",
