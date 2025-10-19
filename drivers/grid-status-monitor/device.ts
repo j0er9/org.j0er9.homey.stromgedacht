@@ -92,9 +92,13 @@ module.exports = class GridStatusDevice extends Device {
   }
 
   private async updateCapabilities() {
+    const zip = this.getStoreValue('zip') as string;
+    let hasAnySuccess = false;
+    let errors = [];
+
+    // Current status
     try {
-      const zip = this.getStoreValue('zip') as string;
-      var newValue = await this.fetchGridStatus(0, zip);
+      const newValue = await this.fetchGridStatus(0, zip);
       if (this.getCapabilityValue('status_power_grid_now') !== newValue) {
         await this.setCapabilityValue('status_power_grid_now', newValue);
         this.log('Current Grid status changed:', newValue, ' PLZ:', zip);
@@ -102,8 +106,15 @@ module.exports = class GridStatusDevice extends Device {
       } else {
         await this.setCapabilityValue('status_power_grid_now', newValue);
       }
+      hasAnySuccess = true;
+    } catch (error) {
+      this.error('Current status update failed:', error instanceof Error ? error.message : error);
+      errors.push('Current status: ' + (error instanceof Error ? error.message : String(error)));
+    }
 
-      newValue = await this.fetchGridStatus(6, zip);
+    // 6h forecast
+    try {
+      const newValue = await this.fetchGridStatus(6, zip);
       if (this.getCapabilityValue('status_power_grid_6h_forecast') !== newValue) {
         await this.setCapabilityValue('status_power_grid_6h_forecast', newValue);
         this.log('Forecast 6h Grid status changed:', newValue, ' PLZ:', zip);
@@ -111,8 +122,15 @@ module.exports = class GridStatusDevice extends Device {
       } else {
         await this.setCapabilityValue('status_power_grid_6h_forecast', newValue);
       }
+      hasAnySuccess = true;
+    } catch (error) {
+      this.error('6h forecast update failed:', error instanceof Error ? error.message : error);
+      errors.push('6h forecast: ' + (error instanceof Error ? error.message : String(error)));
+    }
 
-      newValue = await this.fetchGridStatus(24, zip);
+    // 24h forecast
+    try {
+      const newValue = await this.fetchGridStatus(24, zip);
       if (this.getCapabilityValue('status_power_grid_24h_forecast') !== newValue) {
         await this.setCapabilityValue('status_power_grid_24h_forecast', newValue);
         this.log('Forecast 24h Grid status changed:', newValue, ' PLZ:', zip);
@@ -120,10 +138,21 @@ module.exports = class GridStatusDevice extends Device {
       } else {
         await this.setCapabilityValue('status_power_grid_24h_forecast', newValue);
       }
-
+      hasAnySuccess = true;
     } catch (error) {
-      this.error('Update failed:', error instanceof Error ? error.message : error);
-      await this.setUnavailable('Connection error').catch(this.error);
+      this.error('24h forecast update failed:', error instanceof Error ? error.message : error);
+      errors.push('24h forecast: ' + (error instanceof Error ? error.message : String(error)));
+    }
+
+    // Handle device availability based on overall success/failure
+    if (!hasAnySuccess) {
+      await this.setUnavailable(`Connection errors: ${errors.join('; ')}`).catch(this.error);
+    } else if (errors.length > 0) {
+      // If some requests succeeded but others failed, keep the device available but log the partial failure
+      this.log('Some updates failed but device remains available. Errors:', errors.join('; '));
+      await this.setAvailable().catch(this.error);
+    } else {
+      await this.setAvailable().catch(this.error);
     }
   }
 
