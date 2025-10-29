@@ -1,37 +1,32 @@
 import { Device } from 'homey';
-import { StromGedachtState } from '../../lib/StromGedachtState';
-import fetch from 'node-fetch';
+import Homey from 'homey';
+import { StromGedachtApi } from '../../lib/StromGedachtApi';
+import { CAPABILITIES, POLL_INTERVAL } from '../../lib/constants';
+import { TriggerArgs, TriggerState } from '../../lib/types';
 
 module.exports = class GridStatusDevice extends Device {
   private timer!: NodeJS.Timeout;
-  private readonly POLL_INTERVAL = 10 * 60 * 1000; // 10 Minuten
-  private currentGridStatusChangedTrigger: any;
-  private forecast6hGridChangedTrigger: any;
-  private forecast24hGridChangedTrigger: any;
+  private currentGridStatusChangedTrigger!: Homey.FlowCardTriggerDevice;
+  private forecast6hGridChangedTrigger!: Homey.FlowCardTriggerDevice;
+  private forecast24hGridChangedTrigger!: Homey.FlowCardTriggerDevice;
 
   async onInit() {
     this.currentGridStatusChangedTrigger = this.homey.flow.getDeviceTriggerCard('current-grid-status-changed');
-    this.currentGridStatusChangedTrigger.registerRunListener(async (args: {
-      device: any; onlyExecuteForStatus: any;
-    }, state: { status: any; }) => {
-      this.log('Current grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue('status_power_grid_now'), ' device:', args.device);
-      return args.onlyExecuteForStatus === args.device?.getCapabilityValue('status_power_grid_now');
+    this.currentGridStatusChangedTrigger.registerRunListener(async (args: TriggerArgs, state: TriggerState) => {
+      this.log('Current grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue(CAPABILITIES.NOW));
+      return args.onlyExecuteForStatus === args.device?.getCapabilityValue(CAPABILITIES.NOW);
     });
 
     this.forecast6hGridChangedTrigger = this.homey.flow.getDeviceTriggerCard('6h-forecast-grid-status-changed');
-    this.forecast6hGridChangedTrigger.registerRunListener(async (args: {
-      device: any; onlyExecuteForStatus: any;
-    }, state: { status: any; }) => {
-      this.log('6h forecast grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue('status_power_grid_6h_forecast'), ' device:', args.device);
-      return args.onlyExecuteForStatus === args.device?.getCapabilityValue('status_power_grid_6h_forecast');
+    this.forecast6hGridChangedTrigger.registerRunListener(async (args: TriggerArgs, state: TriggerState) => {
+      this.log('6h forecast grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue(CAPABILITIES.FORECAST_6H));
+      return args.onlyExecuteForStatus === args.device?.getCapabilityValue(CAPABILITIES.FORECAST_6H);
     });
 
     this.forecast24hGridChangedTrigger = this.homey.flow.getDeviceTriggerCard('24h-forecast-grid-status-changed');
-    this.forecast24hGridChangedTrigger.registerRunListener(async (args: {
-      device: any; onlyExecuteForStatus: any;
-    }, state: { status: any; }) => {
-      this.log('24h forecast grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue('status_power_grid_24h_forecast'), ' device:', args.device);
-      return args.onlyExecuteForStatus === args.device?.getCapabilityValue('status_power_grid_24h_forecast');
+    this.forecast24hGridChangedTrigger.registerRunListener(async (args: TriggerArgs, state: TriggerState) => {
+      this.log('24h forecast grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue(CAPABILITIES.FORECAST_24H));
+      return args.onlyExecuteForStatus === args.device?.getCapabilityValue(CAPABILITIES.FORECAST_24H);
     });
 
     this.setAvailable();
@@ -67,26 +62,19 @@ module.exports = class GridStatusDevice extends Device {
     newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log("MyDevice settings where changed");
+    this.log("Grid Monitor settings changed");
   }
 
-  /**
-   * onRenamed is called when the user updates the device's name.
-   * This method can be used this to synchronise the name to the device.
-   * @param {string} name The new name
-   */
   async onRenamed(name: string) {
-    this.log('MyDevice was renamed');
+    this.log('Grid Monitor was renamed to:', name);
   }
 
   private async initializePolling() {
-    // Sofortige Aktualisierung beim Start
     await this.updateCapabilities();
 
-    // Periodische Aktualisierung einrichten
     this.timer = setInterval(
       async () => await this.updateCapabilities(),
-      this.POLL_INTERVAL
+      POLL_INTERVAL
     );
     this.timer.unref();
   }
@@ -94,61 +82,17 @@ module.exports = class GridStatusDevice extends Device {
   private async updateCapabilities() {
     const zip = this.getStoreValue('zip') as string;
     let hasAnySuccess = false;
-    let errors = [];
+    const errors: string[] = [];
 
-    // Current status
-    try {
-      const newValue = await this.fetchGridStatus(0, zip);
-      if (this.getCapabilityValue('status_power_grid_now') !== newValue) {
-        await this.setCapabilityValue('status_power_grid_now', newValue);
-        this.log('Current Grid status changed:', newValue, ' PLZ:', zip);
-        this.currentGridStatusChangedTrigger.trigger(this, { status: newValue });
-      } else {
-        await this.setCapabilityValue('status_power_grid_now', newValue);
-      }
-      hasAnySuccess = true;
-    } catch (error) {
-      this.error('Current status update failed:', error instanceof Error ? error.message : error);
-      errors.push('Current status: ' + (error instanceof Error ? error.message : String(error)));
-    }
-
-    // 6h forecast
-    try {
-      const newValue = await this.fetchGridStatus(6, zip);
-      if (this.getCapabilityValue('status_power_grid_6h_forecast') !== newValue) {
-        await this.setCapabilityValue('status_power_grid_6h_forecast', newValue);
-        this.log('Forecast 6h Grid status changed:', newValue, ' PLZ:', zip);
-        this.forecast6hGridChangedTrigger.trigger(this, { status: newValue });
-      } else {
-        await this.setCapabilityValue('status_power_grid_6h_forecast', newValue);
-      }
-      hasAnySuccess = true;
-    } catch (error) {
-      this.error('6h forecast update failed:', error instanceof Error ? error.message : error);
-      errors.push('6h forecast: ' + (error instanceof Error ? error.message : String(error)));
-    }
-
-    // 24h forecast
-    try {
-      const newValue = await this.fetchGridStatus(24, zip);
-      if (this.getCapabilityValue('status_power_grid_24h_forecast') !== newValue) {
-        await this.setCapabilityValue('status_power_grid_24h_forecast', newValue);
-        this.log('Forecast 24h Grid status changed:', newValue, ' PLZ:', zip);
-        this.forecast24hGridChangedTrigger.trigger(this, { status: newValue });
-      } else {
-        await this.setCapabilityValue('status_power_grid_24h_forecast', newValue);
-      }
-      hasAnySuccess = true;
-    } catch (error) {
-      this.error('24h forecast update failed:', error instanceof Error ? error.message : error);
-      errors.push('24h forecast: ' + (error instanceof Error ? error.message : String(error)));
-    }
+    // Update all capabilities
+    await this.updateSingleCapability(CAPABILITIES.NOW, 0, zip, this.currentGridStatusChangedTrigger, errors, () => hasAnySuccess = true);
+    await this.updateSingleCapability(CAPABILITIES.FORECAST_6H, 6, zip, this.forecast6hGridChangedTrigger, errors, () => hasAnySuccess = true);
+    await this.updateSingleCapability(CAPABILITIES.FORECAST_24H, 24, zip, this.forecast24hGridChangedTrigger, errors, () => hasAnySuccess = true);
 
     // Handle device availability based on overall success/failure
     if (!hasAnySuccess) {
       await this.setUnavailable(`Connection errors: ${errors.join('; ')}`).catch(this.error);
     } else if (errors.length > 0) {
-      // If some requests succeeded but others failed, keep the device available but log the partial failure
       this.log('Some updates failed but device remains available. Errors:', errors.join('; '));
       await this.setAvailable().catch(this.error);
     } else {
@@ -156,23 +100,30 @@ module.exports = class GridStatusDevice extends Device {
     }
   }
 
-  private async fetchGridStatus(offset: number, plz: string): Promise<string> {
-    const response = await fetch(
-      `https://api.stromgedacht.de/v1/now?zip=${plz}&hoursInFuture=${offset}`
-    );
-
-    if (!response.ok) throw new Error(`API Error: ${response.status}`);
-
-    const data = await response.json() as { state: number };
-    const state = data.state;
-    this.log('PLZ: ', plz, ' State: ', state, ' for offset ', offset);
-    switch (state) {
-      case -1: return StromGedachtState.SUPER_GREEN;
-      case 1: return StromGedachtState.GREEN;
-      case 3: return StromGedachtState.YELLOW;
-      case 4: return StromGedachtState.RED;
-      default: throw new Error(`Unknown state: ${state}`);
+  private async updateSingleCapability(
+    capabilityName: string,
+    offset: number,
+    zip: string,
+    trigger: Homey.FlowCardTriggerDevice,
+    errors: string[],
+    onSuccess: () => void
+  ): Promise<void> {
+    try {
+      const newValue = await StromGedachtApi.fetchGridStatus(zip, offset);
+      const currentValue = this.getCapabilityValue(capabilityName);
+      
+      await this.setCapabilityValue(capabilityName, newValue);
+      
+      if (currentValue !== newValue) {
+        this.log(`Capability ${capabilityName} changed to: ${newValue} (PLZ: ${zip})`);
+        await trigger.trigger(this, { status: newValue }).catch(this.error);
+      }
+      
+      onSuccess();
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      this.error(`Failed to update ${capabilityName}:`, errorMsg);
+      errors.push(`${capabilityName}: ${errorMsg}`);
     }
-
   }
 };

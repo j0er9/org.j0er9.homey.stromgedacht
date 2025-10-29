@@ -177,5 +177,184 @@
         }
       ]
     }
+  ],
+  "conditions": [
+    {
+      "id": "current-grid-status-is",
+      "title": {
+        "en": "Current Grid Status !{{is|is not}}",
+        "de": "Aktueller Netzstatus !{{ist|ist nicht}}",
+        "nl": "Huidige netstatus !{{is|is niet}}",
+        "es": "Estado actual de la red !{{es|no es}}"
+      },
+      "titleFormatted": {
+        "en": "Current Grid Status !{{is|is not}} [[status]]",
+        "de": "Aktueller Netzstatus !{{ist|ist nicht}} [[status]]",
+        "nl": "Huidige netstatus !{{is|is niet}} [[status]]",
+        "es": "Estado actual de la red !{{es|no es}} [[status]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "status",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6h-forecast-grid-status-is",
+      "title": {
+        "en": "6h Forecast Grid Status !{{is|is not}}",
+        "de": "6h-Netzstatus-Prognose !{{ist|ist nicht}}",
+        "nl": "6-uurs netstatusvoorspelling !{{is|is niet}}",
+        "es": "Pronóstico de 6h del estado de la red !{{es|no es}}"
+      },
+      "titleFormatted": {
+        "en": "6h Forecast Grid Status !{{is|is not}} [[status]]",
+        "de": "6h-Netzstatus-Prognose !{{ist|ist nicht}} [[status]]",
+        "nl": "6-uurs netstatusvoorspelling !{{is|is niet}} [[status]]",
+        "es": "Pronóstico de 6h del estado de la red !{{es|no es}} [[status]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "status",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24h-forecast-grid-status-is",
+      "title": {
+        "en": "24h Forecast Grid Status !{{is|is not}}",
+        "de": "24h-Netzstatus-Prognose !{{ist|ist nicht}}",
+        "nl": "24-uurs netstatusvoorspelling !{{is|is niet}}",
+        "es": "Pronóstico de 24h del estado de la red !{{es|no es}}"
+      },
+      "titleFormatted": {
+        "en": "24h Forecast Grid Status !{{is|is not}} [[status]]",
+        "de": "24h-Netzstatus-Prognose !{{ist|ist nicht}} [[status]]",
+        "nl": "24-uurs netstatusvoorspelling !{{is|is niet}} [[status]]",
+        "es": "Pronóstico de 24h del estado de la red !{{es|no es}} [[status]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "status",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

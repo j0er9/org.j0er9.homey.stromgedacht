@@ -1,6 +1,12 @@
 # Stromgedacht Grid Status Monitor for Homey
 
-This Homey app integrates with the Stromgedacht API to monitor the power grid status and forecast. It helps users optimize their power consumption based on the current grid load and upcoming forecasts.
+This Homey app integrates with the Stromgedacht API to monitor the power grid status and forecast for Baden-Württemberg. It helps users optimize their power consumption based on the current grid load and upcoming forecasts.
+
+## Disclaimer
+
+**This is an independent third-party application and is not affiliated with, endorsed by, or connected to TransnetBW GmbH, Stromnetz Berlin GmbH, or their Stromgedacht service.** 
+
+This app is simply a wrapper around the publicly available Stromgedacht API to make grid status information accessible within the Homey ecosystem. All rights to "Stromgedacht", including the name, logos, and content, remain with their respective owners. "Stromgedacht" is a trademark of TransnetBW GmbH and is used here for reference purposes only.
 
 ## Features
 
@@ -38,12 +44,14 @@ Each trigger can be configured to fire only for specific status changes (Super G
 
 ## API Information
 
-This app uses the Stromgedacht API (api.stromgedacht.de) to fetch grid status information. The API provides data for regions within Germany.
+This app uses the Stromgedacht API (api.stromgedacht.de) to fetch grid status information. The API provides data primarily for Baden-Württemberg and selected regions in Germany.
+
+**Note:** The Stromgedacht API and all associated content are provided by TransnetBW GmbH and partners. This Homey app only consumes the publicly available API.
 
 ## Requirements
 
 - Homey Pro
-- Valid German postal code
+- Valid German postal code (primarily Baden-Württemberg)
 - Internet connection
 
 ## Support
@@ -63,4 +71,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Credits
 
 - Grid status data provided by [Stromgedacht](https://www.stromgedacht.de)
-- App icon and design elements follow Homey guidelines
