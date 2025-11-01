@@ -36,11 +36,38 @@ The app uses four different states to indicate grid status:
 ## Flow Support
 
 ### Triggers
-- When current grid status changes
-- When 6-hour forecast changes
-- When 24-hour forecast changes
+- **Current grid status changed** - Fires when the current grid status changes
+- **6h forecast grid status changed** - Fires when the 6-hour forecast changes
+- **24h forecast grid status changed** - Fires when the 24-hour forecast changes
 
 Each trigger can be configured to fire only for specific status changes (Super Green, Green, Yellow, or Red).
+
+### Conditions
+- **Current grid status is** - Check if the current grid status matches a specific value
+- **6h forecast grid status is** - Check if the 6-hour forecast matches a specific value
+- **24h forecast grid status is** - Check if the 24-hour forecast matches a specific value
+
+Each condition supports both positive and negative checks (is/is not) for all four status values.
+
+### Flow Examples
+
+**Example 1: Smart device control**
+```
+WHEN Current grid status changed to Green
+THEN Turn on washing machine
+```
+
+**Example 2: Using conditions**
+```
+IF Current grid status is Red
+THEN Send notification "High grid load - avoid power consumption"
+```
+
+**Example 3: Proactive planning**
+```
+IF 6h forecast is not Green
+THEN Charge battery now
+```
 
 ## API Information
 
