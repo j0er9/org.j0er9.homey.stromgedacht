@@ -6,7 +6,6 @@ import { PairDevice, ConditionArgs } from '../../lib/types';
 
 module.exports = class GridMonitorDriver extends Homey.Driver {
 
-
   async onInit() {
     this.log('GridMonitorDriver initialized');
     this.registerConditionCards();
@@ -37,14 +36,15 @@ module.exports = class GridMonitorDriver extends Homey.Driver {
       this.log('Validating PLZ:', data.zip);
 
       if (!data.zip || !ZIP_CODE_REGEX.test(data.zip)) {
-        throw new Error('Invalid postal code format');
+        // Use Homey i18n for format error so the message is localized
+        throw new Error(this.homey.__('driver.error_invalid_format'));
       }
 
       try {
         await StromGedachtApi.validateZip(data.zip);
 
         const device: PairDevice = {
-          name: `Grid Monitor for ${data.zip}`,
+          name: this.homey.__('driver.device_name').replace('__zip__', data.zip),
           data: { id: data.zip },
           store: { zip: data.zip }
         };
@@ -52,7 +52,8 @@ module.exports = class GridMonitorDriver extends Homey.Driver {
         return { valid: true };
       } catch (error) {
         this.error('ZIP validation failed:', error);
-        throw new Error(error instanceof Error ? error.message : 'Validation failed');
+        // Return a localized validation failed message
+        throw new Error(this.homey.__('driver.error_validation_failed'));
       }
     });
 

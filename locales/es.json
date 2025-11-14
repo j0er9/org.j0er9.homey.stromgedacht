@@ -1,0 +1,17 @@
+{
+  "pair": {
+    "validate_plz": {
+      "title": "Ingrese el código postal de su ubicación",
+      "zip_label": "Código postal",
+      "zip_placeholder": "p.ej. 70499",
+      "button_save": "Guardar",
+      "error_empty": "Por favor ingrese el código postal",
+      "error_invalid": "No se proporcionó un código postal válido"
+    }
+  },
+  "driver": {
+    "error_invalid_format": "Formato de código postal no válido",
+    "error_validation_failed": "Validación fallida",
+    "device_name": "Monitor de red para __zip__"
+  }
+}

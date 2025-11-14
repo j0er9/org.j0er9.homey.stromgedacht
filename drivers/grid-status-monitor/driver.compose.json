@@ -1,6 +1,9 @@
 {
   "name": {
-    "en": "Grid Status Monitor"
+    "en": "Grid Status Monitor",
+    "de": "Netzstatus-Monitor",
+    "nl": "Netwerk Status Monitor",
+    "es": "Monitor de Estado de Red"
   },
   "class": "other",
   "capabilities": [ "status_power_grid_now",

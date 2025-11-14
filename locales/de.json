@@ -1,0 +1,17 @@
+{
+  "pair": {
+    "validate_plz": {
+      "title": "Postleitzahl Ihres Standorts eingeben",
+      "zip_label": "Postleitzahl",
+      "zip_placeholder": "z.B. 70499",
+      "button_save": "Speichern",
+      "error_empty": "Bitte Postleitzahl eingeben",
+      "error_invalid": "Keine unterstützte Postleitzahl angegeben"
+    }
+  },
+  "driver": {
+    "error_invalid_format": "Ungültiges Postleitzahlenformat",
+    "error_validation_failed": "Validierung fehlgeschlagen",
+    "device_name": "Netzmonitor für __zip__"
+  }
+}

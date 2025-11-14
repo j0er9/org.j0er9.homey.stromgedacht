@@ -1,11 +1,11 @@
 <script type="text/javascript">
-    Homey.setTitle("Enter zip code for your location");
+    Homey.setTitle(Homey.__('pair.validate_plz.title'));
 
     function doSubmit(){
         let zip = document.getElementById('zip').value.trim();
 
         if(!zip){
-            Homey.alert('Please fill zip code');
+            Homey.alert(Homey.__('pair.validate_plz.error_empty'));
         }
         else {
             Homey.emit('validate_plz', { zip })
@@ -13,7 +13,7 @@
                     if (result.valid) {
                         Homey.nextView();
                     } else {
-                        Homey.alert('No supported zip code given');
+                        Homey.alert(Homey.__('pair.validate_plz.error_invalid'));
                     }
                 })
                 .catch(error => {
@@ -26,9 +26,16 @@
 
 <form class="homey-form">
     <div class="homey-form-group">
-        <label class="homey-form-label" for="zip">Zip code</label>
-        <input class="homey-form-input" type="text" id="zip" name="zipcode" placeholder="e.g. 70499" required />
+        <label class="homey-form-label" for="zip" id="zip-label"></label>
+        <input class="homey-form-input" type="text" id="zip" name="zipcode" required />
     </div>
 
-    <button type="button" class="homey-button-primary" onclick="doSubmit()">Save</button>
+    <button type="button" class="homey-button-primary" onclick="doSubmit()" id="save-button"></button>
 </form>
+
+<script type="text/javascript">
+    // Set translatable content after DOM is loaded
+    document.getElementById('zip-label').textContent = Homey.__('pair.validate_plz.zip_label');
+    document.getElementById('zip').placeholder = Homey.__('pair.validate_plz.zip_placeholder');
+    document.getElementById('save-button').textContent = Homey.__('pair.validate_plz.button_save');
+</script>

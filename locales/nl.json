@@ -1,0 +1,17 @@
+{
+  "pair": {
+    "validate_plz": {
+      "title": "Voer de postcode van uw locatie in",
+      "zip_label": "Postcode",
+      "zip_placeholder": "bijv. 70499",
+      "button_save": "Opslaan",
+      "error_empty": "Vul de postcode in",
+      "error_invalid": "Geen ondersteunde postcode opgegeven"
+    }
+  },
+  "driver": {
+    "error_invalid_format": "Ongeldig postcodeformaat",
+    "error_validation_failed": "Validatie mislukt",
+    "device_name": "Netwerkmonitor voor __zip__"
+  }
+}

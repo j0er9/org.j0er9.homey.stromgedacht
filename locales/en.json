@@ -1,1 +1,17 @@
-{}
+{
+  "pair": {
+    "validate_plz": {
+      "title": "Enter zip code for your location",
+      "zip_label": "Zip code",
+      "zip_placeholder": "e.g. 70499",
+      "button_save": "Save",
+      "error_empty": "Please fill zip code",
+      "error_invalid": "No supported zip code given"
+    }
+  },
+  "driver": {
+    "error_invalid_format": "Invalid postal code format",
+    "error_validation_failed": "Validation failed",
+    "device_name": "Grid Monitor for __zip__"
+  }
+}

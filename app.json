@@ -8,10 +8,16 @@
     "local"
   ],
   "name": {
-    "en": "Stromgedacht - Power Grid Status"
+    "en": "Stromgedacht - Power Grid Status",
+    "de": "Stromgedacht - Netzstatus",
+    "nl": "Stromgedacht - Netwerk Status",
+    "es": "Stromgedacht - Estado de la Red"
   },
   "description": {
-    "en": "Integrates StromGedacht Api to access power grid status of Baden-Würtemberg (Germany). Stay informed about your region’s electricity grid status and make smarter energy decisions!"
+    "en": "Integrates StromGedacht Api to access power grid status of Baden-Würtemberg (Germany). Stay informed about your region's electricity grid status and make smarter energy decisions!",
+    "de": "Integriert die StromGedacht-API für den Netzstatus von Baden-Württemberg (Deutschland). Bleiben Sie über den Stromnetzzustand Ihrer Region informiert und treffen Sie intelligentere Energieentscheidungen!",
+    "nl": "Integreert StromGedacht API voor toegang tot de netwerkcapaciteit van Baden-Württemberg (Duitsland). Blijf op de hoogte van de elektriciteitsstatus in uw regio en neem slimmere energiebeslissingen!",
+    "es": "Integra la API de StromGedacht para acceder al estado de la red eléctrica de Baden-Württemberg (Alemania). ¡Manténgase informado sobre el estado de la red eléctrica de su región y tome decisiones energéticas más inteligentes!"
   },
   "category": [
     "tools"
@@ -418,7 +424,10 @@
   "drivers": [
     {
       "name": {
-        "en": "Grid Status Monitor"
+        "en": "Grid Status Monitor",
+        "de": "Netzstatus-Monitor",
+        "nl": "Netwerk Status Monitor",
+        "es": "Monitor de Estado de Red"
       },
       "class": "other",
       "capabilities": [
