@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <!-- Large lightning bolt filling the space -->
-  <path fill="currentColor" d="M28 2 L12 26 L22 26 L16 46 L40 18 L28 18 L28 2 Z"/>
+  <!-- Large lightning bolt with thick stroke -->
+  <path fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter" d="M28 2 L12 26 L22 26 L16 46 L40 18 L28 18 L28 2 Z"/>
 </svg>
 
