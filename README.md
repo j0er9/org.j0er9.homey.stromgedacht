@@ -21,7 +21,7 @@ This app is simply a wrapper around the publicly available Stromgedacht API to m
 
 The app uses four different states to indicate grid status:
 
-- 🟦 **SUPER GREEN** - Ideal time for power consumption
+- ✅ **SUPER GREEN** - Ideal time for power consumption
 - 🟩 **GREEN** - Good time for power consumption
 - 🟨 **YELLOW** - Try to reduce power consumption
 - 🟥 **RED** - Critical grid load, avoid power consumption if possible
@@ -66,7 +66,7 @@ THEN Send notification "High grid load - avoid power consumption"
 **Example 3: Proactive planning**
 ```
 IF 6h forecast is not Green
-THEN Charge battery now
+THEN Charge car battery now
 ```
 
 ## API Information
@@ -74,12 +74,6 @@ THEN Charge battery now
 This app uses the Stromgedacht API (api.stromgedacht.de) to fetch grid status information. The API provides data primarily for Baden-Württemberg and selected regions in Germany.
 
 **Note:** The Stromgedacht API and all associated content are provided by TransnetBW GmbH and partners. This Homey app only consumes the publicly available API.
-
-## Requirements
-
-- Homey Pro
-- Valid German postal code (primarily Baden-Württemberg)
-- Internet connection
 
 ## Support
 
