@@ -1,6 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <!-- Large lightning bolt with thick stroke -->
-  <path fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter" d="M28 2 L12 26 L22 26 L16 46 L40 18 L28 18 L28 2 Z"/>
+  <!-- Google Maps style location pin - outline only -->
+  
+  <!-- Pin shape - transparent with black stroke -->
+  <path fill="none" stroke="currentColor" stroke-width="2" d="M24 4C16.28 4 10 10.28 10 18c0 8.4 14 26 14 26s14-17.6 14-26c0-7.72-6.28-14-14-14z"/>
+  
+  <!-- Inner circle - transparent with black stroke (larger) -->
+  <circle fill="none" stroke="currentColor" stroke-width="2" cx="24" cy="18" r="10"/>
+  
+  <!-- Lightning bolt - EXACT same as app icon, centered in pin circle (scaled up) -->
+  <g transform="translate(14, 8.5) scale(0.43)">
+    <path fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter" d="M28 2 L12 26 L22 26 L16 46 L40 18 L28 18 L28 2 Z"/>
+  </g>
 </svg>
+
+
 
