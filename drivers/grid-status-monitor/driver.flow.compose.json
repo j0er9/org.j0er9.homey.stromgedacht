@@ -176,6 +176,65 @@
           ]
         }
       ]
+    },
+    {
+      "id": "48h-forecast-grid-status-changed",
+      "title": {
+        "en": "48h Forecast Grid Status changed",
+        "de": "48h-Netzstatus-Prognose geändert",
+        "nl": "48-uurs netstatusvoorspelling veranderd",
+        "es": "Pronóstico de 48h del estado de la red cambió"
+      },
+      "titleFormatted": {
+        "en": "48h Forecast Grid Status changed to [[onlyExecuteForStatus]]",
+        "de": "48h-Netzstatus-Prognose ändert sich zu [[onlyExecuteForStatus]]",
+        "nl": "48-uurs netstatusvoorspelling veranderd naar [[onlyExecuteForStatus]]",
+        "es": "Pronóstico de 48h del estado de la red cambió a [[onlyExecuteForStatus]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "onlyExecuteForStatus",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "conditions": [
@@ -310,6 +369,65 @@
         "de": "24h-Netzstatus-Prognose !{{ist|ist nicht}} [[status]]",
         "nl": "24-uurs netstatusvoorspelling !{{is|is niet}} [[status]]",
         "es": "Pronóstico de 24h del estado de la red !{{es|no es}} [[status]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "status",
+          "values": [
+            {
+              "id": "green",
+              "label": {
+                "en": "Green",
+                "de": "Grün",
+                "nl": "Groen",
+                "es": "Verde"
+              }
+            },
+            {
+              "id": "superGreen",
+              "label": {
+                "en": "Super Green",
+                "de": "Super Grün",
+                "nl": "Super Groen",
+                "es": "Super Verde"
+              }
+            },
+            {
+              "id": "yellow",
+              "label": {
+                "en": "Yellow",
+                "de": "Gelb",
+                "nl": "Geel",
+                "es": "Amarillo"
+              }
+            },
+            {
+              "id": "red",
+              "label": {
+                "en": "Red",
+                "de": "Rot",
+                "nl": "Rood",
+                "es": "Rojo"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "48h-forecast-grid-status-is",
+      "title": {
+        "en": "48h Forecast Grid Status !{{is|is not}}",
+        "de": "48h-Netzstatus-Prognose !{{ist|ist nicht}}",
+        "nl": "48-uurs netstatusvoorspelling !{{is|is niet}}",
+        "es": "Pronóstico de 48h del estado de la red !{{es|no es}}"
+      },
+      "titleFormatted": {
+        "en": "48h Forecast Grid Status !{{is|is not}} [[status]]",
+        "de": "48h-Netzstatus-Prognose !{{ist|ist nicht}} [[status]]",
+        "nl": "48-uurs netstatusvoorspelling !{{is|is niet}} [[status]]",
+        "es": "Pronóstico de 48h del estado de la red !{{es|no es}} [[status]]"
       },
       "args": [
         {

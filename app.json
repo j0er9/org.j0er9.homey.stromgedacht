@@ -225,6 +225,70 @@
             ]
           }
         ]
+      },
+      {
+        "id": "48h-forecast-grid-status-changed",
+        "title": {
+          "en": "48h Forecast Grid Status changed",
+          "de": "48h-Netzstatus-Prognose geändert",
+          "nl": "48-uurs netstatusvoorspelling veranderd",
+          "es": "Pronóstico de 48h del estado de la red cambió"
+        },
+        "titleFormatted": {
+          "en": "48h Forecast Grid Status changed to [[onlyExecuteForStatus]]",
+          "de": "48h-Netzstatus-Prognose ändert sich zu [[onlyExecuteForStatus]]",
+          "nl": "48-uurs netstatusvoorspelling veranderd naar [[onlyExecuteForStatus]]",
+          "es": "Pronóstico de 48h del estado de la red cambió a [[onlyExecuteForStatus]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=grid-status-monitor"
+          },
+          {
+            "type": "dropdown",
+            "name": "onlyExecuteForStatus",
+            "values": [
+              {
+                "id": "green",
+                "label": {
+                  "en": "Green",
+                  "de": "Grün",
+                  "nl": "Groen",
+                  "es": "Verde"
+                }
+              },
+              {
+                "id": "superGreen",
+                "label": {
+                  "en": "Super Green",
+                  "de": "Super Grün",
+                  "nl": "Super Groen",
+                  "es": "Super Verde"
+                }
+              },
+              {
+                "id": "yellow",
+                "label": {
+                  "en": "Yellow",
+                  "de": "Gelb",
+                  "nl": "Geel",
+                  "es": "Amarillo"
+                }
+              },
+              {
+                "id": "red",
+                "label": {
+                  "en": "Red",
+                  "de": "Rot",
+                  "nl": "Rood",
+                  "es": "Rojo"
+                }
+              }
+            ]
+          }
+        ]
       }
     ],
     "conditions": [
@@ -419,6 +483,70 @@
             ]
           }
         ]
+      },
+      {
+        "id": "48h-forecast-grid-status-is",
+        "title": {
+          "en": "48h Forecast Grid Status !{{is|is not}}",
+          "de": "48h-Netzstatus-Prognose !{{ist|ist nicht}}",
+          "nl": "48-uurs netstatusvoorspelling !{{is|is niet}}",
+          "es": "Pronóstico de 48h del estado de la red !{{es|no es}}"
+        },
+        "titleFormatted": {
+          "en": "48h Forecast Grid Status !{{is|is not}} [[status]]",
+          "de": "48h-Netzstatus-Prognose !{{ist|ist nicht}} [[status]]",
+          "nl": "48-uurs netstatusvoorspelling !{{is|is niet}} [[status]]",
+          "es": "Pronóstico de 48h del estado de la red !{{es|no es}} [[status]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=grid-status-monitor"
+          },
+          {
+            "type": "dropdown",
+            "name": "status",
+            "values": [
+              {
+                "id": "green",
+                "label": {
+                  "en": "Green",
+                  "de": "Grün",
+                  "nl": "Groen",
+                  "es": "Verde"
+                }
+              },
+              {
+                "id": "superGreen",
+                "label": {
+                  "en": "Super Green",
+                  "de": "Super Grün",
+                  "nl": "Super Groen",
+                  "es": "Super Verde"
+                }
+              },
+              {
+                "id": "yellow",
+                "label": {
+                  "en": "Yellow",
+                  "de": "Gelb",
+                  "nl": "Geel",
+                  "es": "Amarillo"
+                }
+              },
+              {
+                "id": "red",
+                "label": {
+                  "en": "Red",
+                  "de": "Rot",
+                  "nl": "Rood",
+                  "es": "Rojo"
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -434,7 +562,8 @@
       "capabilities": [
         "status_power_grid_now",
         "status_power_grid_6h_forecast",
-        "status_power_grid_24h_forecast"
+        "status_power_grid_24h_forecast",
+        "status_power_grid_48h_forecast"
       ],
       "platforms": [
         "local"
@@ -475,6 +604,66 @@
         "de": "24h Vorhersage",
         "nl": "24-uurs Voorspelling",
         "es": "Pronóstico 24h"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "green",
+          "title": {
+            "en": "Green",
+            "de": "Grün",
+            "nl": "Groen",
+            "es": "Verde"
+          }
+        },
+        {
+          "id": "superGreen",
+          "title": {
+            "en": "Super Green",
+            "de": "Super Grün",
+            "nl": "Super Groen",
+            "es": "Super Verde"
+          }
+        },
+        {
+          "id": "yellow",
+          "title": {
+            "en": "Yellow",
+            "de": "Gelb",
+            "nl": "Geel",
+            "es": "Amarillo"
+          }
+        },
+        {
+          "id": "red",
+          "title": {
+            "en": "Red",
+            "de": "Rot",
+            "nl": "Rood",
+            "es": "Rojo"
+          }
+        },
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "de": "Unbekannt",
+            "nl": "Onbekend",
+            "es": "Desconocido"
+          }
+        }
+      ]
+    },
+    "status_power_grid_48h_forecast": {
+      "id": "status_power_grid_48h_forecast",
+      "type": "enum",
+      "title": {
+        "en": "48h Forecast",
+        "de": "48h Vorhersage",
+        "nl": "48-uurs Voorspelling",
+        "es": "Pronóstico 48h"
       },
       "getable": true,
       "setable": false,

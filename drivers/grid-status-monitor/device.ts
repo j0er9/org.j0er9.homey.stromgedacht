@@ -9,6 +9,7 @@ module.exports = class GridStatusDevice extends Device {
   private currentGridStatusChangedTrigger!: Homey.FlowCardTriggerDevice;
   private forecast6hGridChangedTrigger!: Homey.FlowCardTriggerDevice;
   private forecast24hGridChangedTrigger!: Homey.FlowCardTriggerDevice;
+  private forecast48hGridChangedTrigger!: Homey.FlowCardTriggerDevice;
 
   async onInit() {
     this.currentGridStatusChangedTrigger = this.homey.flow.getDeviceTriggerCard('current-grid-status-changed');
@@ -27,6 +28,12 @@ module.exports = class GridStatusDevice extends Device {
     this.forecast24hGridChangedTrigger.registerRunListener(async (args: TriggerArgs, state: TriggerState) => {
       this.log('24h forecast grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue(CAPABILITIES.FORECAST_24H));
       return args.onlyExecuteForStatus === args.device?.getCapabilityValue(CAPABILITIES.FORECAST_24H);
+    });
+
+    this.forecast48hGridChangedTrigger = this.homey.flow.getDeviceTriggerCard('48h-forecast-grid-status-changed');
+    this.forecast48hGridChangedTrigger.registerRunListener(async (args: TriggerArgs, state: TriggerState) => {
+      this.log('48h forecast grid status. Flow trigger check:', args.onlyExecuteForStatus, args.device.getCapabilityValue(CAPABILITIES.FORECAST_48H));
+      return args.onlyExecuteForStatus === args.device?.getCapabilityValue(CAPABILITIES.FORECAST_48H);
     });
 
     this.setAvailable();
@@ -88,6 +95,7 @@ module.exports = class GridStatusDevice extends Device {
     await this.updateSingleCapability(CAPABILITIES.NOW, 0, zip, this.currentGridStatusChangedTrigger, errors, () => hasAnySuccess = true);
     await this.updateSingleCapability(CAPABILITIES.FORECAST_6H, 6, zip, this.forecast6hGridChangedTrigger, errors, () => hasAnySuccess = true);
     await this.updateSingleCapability(CAPABILITIES.FORECAST_24H, 24, zip, this.forecast24hGridChangedTrigger, errors, () => hasAnySuccess = true);
+    await this.updateSingleCapability(CAPABILITIES.FORECAST_48H, 48, zip, this.forecast48hGridChangedTrigger, errors, () => hasAnySuccess = true);
 
     // Handle device availability based on overall success/failure
     if (!hasAnySuccess) {

@@ -8,7 +8,8 @@
   "class": "other",
   "capabilities": [ "status_power_grid_now",
         "status_power_grid_6h_forecast",
-        "status_power_grid_24h_forecast"],
+        "status_power_grid_24h_forecast",
+        "status_power_grid_48h_forecast"],
   "platforms": [
     "local"
   ],
