@@ -13,6 +13,7 @@ This app is simply a wrapper around the publicly available Stromgedacht API to m
 - Real-time monitoring of current grid status
 - 6-hour forecast of grid status
 - 24-hour forecast of grid status
+- 48-hour forecast of grid status
 - Automatic updates every 10 minutes
 - Flow support for status changes
 - Multi-language support (English, German, Dutch, Spanish)
@@ -39,6 +40,7 @@ The app uses four different states to indicate grid status:
 - **Current grid status changed** - Fires when the current grid status changes
 - **6h forecast grid status changed** - Fires when the 6-hour forecast changes
 - **24h forecast grid status changed** - Fires when the 24-hour forecast changes
+- **48h forecast grid status changed** - Fires when the 48-hour forecast changes
 
 Each trigger can be configured to fire only for specific status changes (Super Green, Green, Yellow, or Red).
 
@@ -46,6 +48,7 @@ Each trigger can be configured to fire only for specific status changes (Super G
 - **Current grid status is** - Check if the current grid status matches a specific value
 - **6h forecast grid status is** - Check if the 6-hour forecast matches a specific value
 - **24h forecast grid status is** - Check if the 24-hour forecast matches a specific value
+- **48h forecast grid status is** - Check if the 48-hour forecast matches a specific value
 
 Each condition supports both positive and negative checks (is/is not) for all four status values.
 
