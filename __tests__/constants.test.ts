@@ -1,4 +1,9 @@
-import { CAPABILITIES, API_BASE_URL, POLL_INTERVAL, ZIP_CODE_REGEX } from '../lib/constants';
+import {
+  CAPABILITIES,
+  API_BASE_URL,
+  POLL_INTERVAL,
+  ZIP_CODE_REGEX,
+} from '../lib/constants';
 
 describe('constants', () => {
   describe('CAPABILITIES', () => {
@@ -6,12 +11,14 @@ describe('constants', () => {
       expect(CAPABILITIES).toHaveProperty('NOW');
       expect(CAPABILITIES).toHaveProperty('FORECAST_6H');
       expect(CAPABILITIES).toHaveProperty('FORECAST_24H');
+      expect(CAPABILITIES).toHaveProperty('FORECAST_48H');
     });
 
     it('should have correct capability names', () => {
       expect(CAPABILITIES.NOW).toBe('status_power_grid_now');
       expect(CAPABILITIES.FORECAST_6H).toBe('status_power_grid_6h_forecast');
       expect(CAPABILITIES.FORECAST_24H).toBe('status_power_grid_24h_forecast');
+      expect(CAPABILITIES.FORECAST_48H).toBe('status_power_grid_48h_forecast');
     });
   });
 
@@ -44,11 +51,11 @@ describe('constants', () => {
     });
 
     it('should not match invalid zip codes', () => {
-      expect(ZIP_CODE_REGEX.test('1234')).toBe(false);   // too short
+      expect(ZIP_CODE_REGEX.test('1234')).toBe(false); // too short
       expect(ZIP_CODE_REGEX.test('123456')).toBe(false); // too long
-      expect(ZIP_CODE_REGEX.test('abcde')).toBe(false);  // not numeric
-      expect(ZIP_CODE_REGEX.test('7017a')).toBe(false);  // contains letter
-      expect(ZIP_CODE_REGEX.test('')).toBe(false);       // empty
+      expect(ZIP_CODE_REGEX.test('abcde')).toBe(false); // not numeric
+      expect(ZIP_CODE_REGEX.test('7017a')).toBe(false); // contains letter
+      expect(ZIP_CODE_REGEX.test('')).toBe(false); // empty
       expect(ZIP_CODE_REGEX.test(' 70173')).toBe(false); // leading space
       expect(ZIP_CODE_REGEX.test('70173 ')).toBe(false); // trailing space
     });

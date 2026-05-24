@@ -15,7 +15,8 @@ module.exports = class GridMonitorDriver extends Homey.Driver {
     const conditions = [
       { id: 'current-grid-status-is', capability: CAPABILITIES.NOW },
       { id: '6h-forecast-grid-status-is', capability: CAPABILITIES.FORECAST_6H },
-      { id: '24h-forecast-grid-status-is', capability: CAPABILITIES.FORECAST_24H }
+      { id: '24h-forecast-grid-status-is', capability: CAPABILITIES.FORECAST_24H },
+      { id: '48h-forecast-grid-status-is', capability: CAPABILITIES.FORECAST_48H },
     ];
 
     conditions.forEach(({ id, capability }) => {
@@ -46,7 +47,7 @@ module.exports = class GridMonitorDriver extends Homey.Driver {
         const device: PairDevice = {
           name: this.homey.__('driver.device_name').replace('__zip__', data.zip),
           data: { id: data.zip },
-          store: { zip: data.zip }
+          store: { zip: data.zip },
         };
         devices.push(device);
         return { valid: true };
@@ -63,4 +64,4 @@ module.exports = class GridMonitorDriver extends Homey.Driver {
     });
   }
 
-};
+};

@@ -1,6 +1,6 @@
+import fetch from 'node-fetch';
 import { StromGedachtApi } from '../lib/StromGedachtApi';
 import { StromGedachtState } from '../lib/StromGedachtState';
-import fetch from 'node-fetch';
 
 // Mock node-fetch
 jest.mock('node-fetch');

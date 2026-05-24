@@ -32,6 +32,10 @@
   "author": {
     "name": "j0er9"
   },
+  "source": "https://github.com/j0er9/org.j0er9.stromgedacht",
+  "bugs": {
+    "url": "https://github.com/j0er9/org.j0er9.stromgedacht/issues"
+  },
   "flow": {
     "triggers": [
       {

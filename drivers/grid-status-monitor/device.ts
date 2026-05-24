@@ -1,5 +1,4 @@
-import { Device } from 'homey';
-import Homey from 'homey';
+import Homey, { Device } from 'homey';
 import { StromGedachtApi } from '../../lib/StromGedachtApi';
 import { CAPABILITIES, POLL_INTERVAL } from '../../lib/constants';
 import { TriggerArgs, TriggerState } from '../../lib/types';
@@ -36,7 +35,7 @@ module.exports = class GridStatusDevice extends Device {
       return args.onlyExecuteForStatus === args.device?.getCapabilityValue(CAPABILITIES.FORECAST_48H);
     });
 
-    this.setAvailable();
+    this.setAvailable().catch(this.error);
     this.log('Device initialized');
     await this.initializePolling();
   }
@@ -52,6 +51,7 @@ module.exports = class GridStatusDevice extends Device {
       clearInterval(this.timer);
     }
   }
+
   /**
    * onSettings is called when the user updates the device's settings.
    * @param {object} event the onSettings event data
@@ -69,7 +69,7 @@ module.exports = class GridStatusDevice extends Device {
     newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log("Grid Monitor settings changed");
+    this.log('Grid Monitor settings changed');
   }
 
   async onRenamed(name: string) {
@@ -80,8 +80,10 @@ module.exports = class GridStatusDevice extends Device {
     await this.updateCapabilities();
 
     this.timer = setInterval(
-      async () => await this.updateCapabilities(),
-      POLL_INTERVAL
+      () => {
+        this.updateCapabilities().catch(this.error);
+      },
+      POLL_INTERVAL,
     );
     this.timer.unref();
   }
@@ -92,10 +94,18 @@ module.exports = class GridStatusDevice extends Device {
     const errors: string[] = [];
 
     // Update all capabilities
-    await this.updateSingleCapability(CAPABILITIES.NOW, 0, zip, this.currentGridStatusChangedTrigger, errors, () => hasAnySuccess = true);
-    await this.updateSingleCapability(CAPABILITIES.FORECAST_6H, 6, zip, this.forecast6hGridChangedTrigger, errors, () => hasAnySuccess = true);
-    await this.updateSingleCapability(CAPABILITIES.FORECAST_24H, 24, zip, this.forecast24hGridChangedTrigger, errors, () => hasAnySuccess = true);
-    await this.updateSingleCapability(CAPABILITIES.FORECAST_48H, 48, zip, this.forecast48hGridChangedTrigger, errors, () => hasAnySuccess = true);
+    await this.updateSingleCapability(CAPABILITIES.NOW, 0, zip, this.currentGridStatusChangedTrigger, errors, () => {
+      hasAnySuccess = true;
+    });
+    await this.updateSingleCapability(CAPABILITIES.FORECAST_6H, 6, zip, this.forecast6hGridChangedTrigger, errors, () => {
+      hasAnySuccess = true;
+    });
+    await this.updateSingleCapability(CAPABILITIES.FORECAST_24H, 24, zip, this.forecast24hGridChangedTrigger, errors, () => {
+      hasAnySuccess = true;
+    });
+    await this.updateSingleCapability(CAPABILITIES.FORECAST_48H, 48, zip, this.forecast48hGridChangedTrigger, errors, () => {
+      hasAnySuccess = true;
+    });
 
     // Handle device availability based on overall success/failure
     if (!hasAnySuccess) {
@@ -114,19 +124,19 @@ module.exports = class GridStatusDevice extends Device {
     zip: string,
     trigger: Homey.FlowCardTriggerDevice,
     errors: string[],
-    onSuccess: () => void
+    onSuccess: () => void,
   ): Promise<void> {
     try {
       const newValue = await StromGedachtApi.fetchGridStatus(zip, offset);
       const currentValue = this.getCapabilityValue(capabilityName);
-      
+
       await this.setCapabilityValue(capabilityName, newValue);
-      
+
       if (currentValue !== newValue) {
         this.log(`Capability ${capabilityName} changed to: ${newValue} (PLZ: ${zip})`);
         await trigger.trigger(this, { status: newValue }).catch(this.error);
       }
-      
+
       onSuccess();
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);

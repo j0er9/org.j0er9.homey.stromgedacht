@@ -4,7 +4,7 @@ import { StromGedachtApiResponse } from './types';
 import { API_BASE_URL } from './constants';
 
 export class StromGedachtApi {
-  
+
   /**
    * Validates a German postal code (ZIP) with the Stromgedacht API
    * @param zip - 5-digit German postal code
