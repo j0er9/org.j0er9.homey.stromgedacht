@@ -10,5 +10,8 @@
   },
   "1.0.3": {
     "en": "Feat: Add 48h forecast capability"
+  },
+  "1.0.4": {
+    "en": "Fix: Register missing 48h forecast condition, resolve linting issues, and fix manifest validation."
   }
 }
